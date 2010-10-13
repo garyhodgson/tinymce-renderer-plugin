@@ -16,6 +16,7 @@ Provides a wysiwyg textarea renderer using the [TinyMCE Editor](http://tinymce.m
 ## Limitations
 
 Because this plugin scratches my itch only a few of the TinyMCE plugins and themes are available:
+
 * The only theme used is advanced-default
 * The following plugins are used:
 ** contextmenu
