@@ -19,27 +19,27 @@ Because this plugin scratches my itch only a few of the TinyMCE plugins and them
 
 * The only theme used is advanced-default
 * The following plugins are used:
-** contextmenu
-** fullscreen
-** inlinepopups
-** paste
-** preview
-** table
+    * contextmenu
+    * fullscreen
+    * inlinepopups
+    * paste
+    * preview
+    * table
 * The configuration options are modifiable but lie deep in the jar file structure: tinymce-renderer-plugin.jar\templates\plugins\renderers\tinymce\tinymce-renderer-edit.vm
 * Buttons available:
-** bold, italic, underline, strikethrough
-** justifyleft, justifycenter, justifyright, justifyfull
-** bullist, numlist
-** outdent, indent, blockquote
-** undo, redo
-** link, unlink, image
-** formatselect, fontselect, fontsizeselect
-** forecolor, backcolor
-** tablecontrols
-** hr, removeformat, visualaid
-** pastetext, pasteword, selectall
-** sub, sup, charmap
-** fullscreen, preview, cleanup, code
+    * bold, italic, underline, strikethrough
+    * justifyleft, justifycenter, justifyright, justifyfull
+    * bullist, numlist
+    * outdent, indent, blockquote
+    * undo, redo
+    * link, unlink, image
+    * formatselect, fontselect, fontsizeselect
+    * forecolor, backcolor
+    * tablecontrols
+    * hr, removeformat, visualaid
+    * pastetext, pasteword, selectall
+    * sub, sup, charmap
+    * fullscreen, preview, cleanup, code
 
 
 ## Support
