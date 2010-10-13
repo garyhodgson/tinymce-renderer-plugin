@@ -1,126 +1,154 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title>garyhodgson/tinymce-renderer-plugin @ GitHub</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+		<title>
+			garyhodgson/tinymce-renderer-plugin @ GitHub
+		</title>
+	</head>
+	<body>
+		<p>
+			<a href="http://github.com/garyhodgson/tinymce-renderer-plugin"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+		</p>
+		<div id="container">
+			<div class="download">
+				<a href="http://github.com/garyhodgson/tinymce-renderer-plugin/zipball/master"><img border="0" width="90" src="http://github.com/images/modules/download/zip.png" /></a> <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/tarball/master"><img border="0" width="90" src="http://github.com/images/modules/download/tar.png" /></a>
+			</div>
+			<h1>
+				<a href="http://github.com/garyhodgson/tinymce-renderer-plugin">tinymce-renderer-plugin</a>
+			</h1>
 	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #7f3fb2;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #80c04d; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #80c04d; }
-    h3 { text-align: center; color: #80c04d; }
-    a { color: #80c04d; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
-</head>
-
-<body>
-  <a href="http://github.com/garyhodgson/tinymce-renderer-plugin"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="http://github.com/garyhodgson/tinymce-renderer-plugin">tinymce-renderer-plugin</a>
-      <span class="small">by <a href="http://github.com/garyhodgson">garyhodgson</a></span></h1>
-
-    <div class="description">
-      Provides a wysiwyg textarea renderer using the TinyMCE Editor
-    </div>
-
-    <p>## Limitations
-
-Because this plugin scratches my itch only a few of the TinyMCE plugins and themes are available:
-
-* The only theme used is advanced-default
-* The following plugins are used:
-    * contextmenu
-    * fullscreen
-    * inlinepopups
-    * paste
-    * preview
-    * table
-* The configuration options are modifiable but lie deep in the jar file structure: tinymce-renderer-plugin.jar\templates\plugins\renderers\tinymce\tinymce-renderer-edit.vm
-* Buttons available:
-    * bold, italic, underline, strikethrough
-    * justifyleft, justifycenter, justifyright, justifyfull
-    * bullist, numlist
-    * outdent, indent, blockquote
-    * undo, redo
-    * link, unlink, image
-    * formatselect, fontselect, fontsizeselect
-    * forecolor, backcolor
-    * tablecontrols
-    * hr, removeformat, visualaid
-    * pastetext, pasteword, selectall
-    * sub, sup, charmap
-    * fullscreen, preview, cleanup, code
-
-
-## Support
-
-This plugin is unsupported, and I am releasing it in case it is useful for people.
-If the plugin is not working whatsoever I will try and find time to help resolve the issue.
-I do not currently plan on implementing more themes or mce-plugins, but will help as much as I can if you want to extened the plugin for your environment. 
-
-## Modifications to the TinyMCE Library
-
-* tiny_mce_popup.js - modified to set the tinymce object which seemed to be not set when called within jira.  Identified with comment: "Modified from the original by Gary Hodgson for Jira Plugin"
-* themes/advanced/skins/default/dialog.css - prefixed all declarations with "tinymce_dialog"
-* themes/advanced/skins/default/content.css - prefixed all declarations with "mceEditor"
-* themes/advanced/*.htm - added explicit class attributes to body tags for theme css declarations (otherwise the jira css overrides the styles, for example: tabs and buttons) Perhaps there is a TinyMCE configuration item for this, but I couldn't find one that worked.
-* plugins/table/*htm - as above.</p><h2>Install</h2>
-<p>* Copy the tinymce-renderer-plugin-xx.jar file to {JIRA_HOME}/plugins/installed-plugins
-* Restart jira
-* Ensure the html renderer option is enabled. As Administrator go to plugins, choose "Wiki Renderer Macros Plugin", and select "Enable" for the html option.
-* Modify the renderer for the field you wish to use TinyMCE in. Example: As Administrator go to "Field Configurations", select "Configure", next to a text field select "Renderers", choose "TinyMCE Renderer"</p>
-<h2>License</h2>
-<p>[BSD](http://www.opensource.org/licenses/bsd-license.php)</p>
-<h2>Authors</h2>
-<p>Gary Hodgson (contact@garyhodgson.com)<br/><br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/zipball/master">zip</a> or
-      <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/garyhodgson/tinymce-renderer-plugin</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/garyhodgson/tinymce-renderer-plugin">garyhodgson/tinymce-renderer-plugin</a>
-    </div>
-
-  </div>
-
-  
-</body>
+			<h2>
+				Description
+			</h2>
+			<div class="description">
+				Provides a wysiwyg textarea renderer using the TinyMCE Editor
+			</div>
+			<h2>
+				Install
+			</h2>
+			<ul>
+				<li>Copy the tinymce-renderer-plugin-xx.jar file to {JIRA_HOME}/plugins/installed-plugins
+				</li>
+				<li>Restart jira
+				</li>
+				<li>Ensure the html renderer option is enabled. As Administrator go to plugins, choose "Wiki Renderer Macros Plugin", and select "Enable" for the html option.
+				</li>
+				<li>Modify the renderer for the field you wish to use TinyMCE in. Example: As Administrator go to "Field Configurations", select "Configure", next to a text field select "Renderers", choose "TinyMCE Renderer"
+				</li>
+			</ul>
+			<h2>
+				Features / Limitations
+			</h2>
+			<p>
+				Because this plugin scratches my itch only a few of the TinyMCE plugins and themes are available:
+			</p>
+			<ul>
+				<li>The only theme used is advanced-default
+				</li>
+				<li>The following plugins are used:
+				</li>
+				<li style="list-style: none">
+					<ul>
+						<li>contextmenu
+						</li>
+						<li>fullscreen
+						</li>
+						<li>inlinepopups
+						</li>
+						<li>paste
+						</li>
+						<li>preview
+						</li>
+						<li>table
+						</li>
+					</ul>
+				</li>
+				<li>The configuration options are modifiable but lie deep in the jar file structure: tinymce-renderer-plugin.jar\templates\plugins\renderers\tinymce\tinymce-renderer-edit.vm
+				</li>
+				<li>Buttons available:
+				</li>
+				<li style="list-style: none">
+					<ul>
+						<li>bold, italic, underline, strikethrough
+						</li>
+						<li>justifyleft, justifycenter, justifyright, justifyfull
+						</li>
+						<li>bullist, numlist
+						</li>
+						<li>outdent, indent, blockquote
+						</li>
+						<li>undo, redo
+						</li>
+						<li>link, unlink, image
+						</li>
+						<li>formatselect, fontselect, fontsizeselect
+						</li>
+						<li>forecolor, backcolor
+						</li>
+						<li>tablecontrols
+						</li>
+						<li>hr, removeformat, visualaid
+						</li>
+						<li>pastetext, pasteword, selectall
+						</li>
+						<li>sub, sup, charmap
+						</li>
+						<li>fullscreen, preview, cleanup, code
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<h2>
+				Support
+			</h2>
+			<p>
+				This plugin is unsupported, and I am releasing it in case it is useful for people. If the plugin is not working whatsoever I will try and find time to help resolve the issue. I do not currently plan on implementing more themes or mce-plugins, but will help as much as I can if you want to extened the plugin for your environment.
+			</p>
+			<h2>
+				Modifications to the TinyMCE Library
+			</h2>
+			<ul>
+				<li>tiny_mce_popup.js - modified to set the tinymce object which seemed to be not set when called within jira. Identified with comment: "Modified from the original by Gary Hodgson for Jira Plugin"
+				</li>
+				<li>themes/advanced/skins/default/dialog.css - prefixed all declarations with "tinymce_dialog"
+				</li>
+				<li>themes/advanced/skins/default/content.css - prefixed all declarations with "mceEditor"
+				</li>
+				<li>themes/advanced/*.htm - added explicit class attributes to body tags for theme css declarations (otherwise the jira css overrides the styles, for example: tabs and buttons) Perhaps there is a TinyMCE configuration item for this, but I couldn't find one that worked.
+				</li>
+				<li>plugins/table/*htm - as above.
+				</li>
+			</ul>
+			<h2>
+				License
+			</h2>
+			<p>
+				<a href="http://www.opensource.org/licenses/bsd-license.php">BSD</a>
+			</p>
+			<h2>
+				Authors
+			</h2>
+			<p>
+				Gary Hodgson (contact@garyhodgson.com)
+			</p>
+			<h2>
+				Download
+			</h2>
+			<p>
+				You can download this project in either <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/zipball/master">zip</a> or <a href="http://github.com/garyhodgson/tinymce-renderer-plugin/tarball/master">tar</a> formats.
+			</p>
+			<p>
+				You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
+			</p>
+			<pre>
+$ git clone git://github.com/garyhodgson/tinymce-renderer-plugin
+</pre>
+			<div class="footer">
+				get the source code on GitHub : <a href="http://github.com/garyhodgson/tinymce-renderer-plugin">garyhodgson/tinymce-renderer-plugin</a>
+			</div>
+		</div>
+	</body>
 </html>
