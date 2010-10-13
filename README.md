@@ -2,7 +2,7 @@
 
 ## Description
 
-Provides a wysiwyg textarea renderer using the [TinyMCE Editor](http://tinymce.moxiecode.com).
+A Jira plugin that provides a wysiwyg textarea renderer using the [TinyMCE Editor](http://tinymce.moxiecode.com).
 
 
 ## Installation and Configuration
