@@ -4,6 +4,8 @@
 
 A Jira plugin that provides a wysiwyg textarea renderer using the [TinyMCE Editor](http://tinymce.moxiecode.com).
 
+* [Homepage](http://garyhodgson.github.com/tinymce-renderer-plugin)
+* [Atlassian Plugin Page](https://plugins.atlassian.com/plugin/details/30365)
 
 ## Installation and Configuration
 
