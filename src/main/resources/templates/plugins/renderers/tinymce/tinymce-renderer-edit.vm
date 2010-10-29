@@ -4,8 +4,8 @@ $webResourceManager.requireResource("com.garyhodgson.jira.tinymce-renderer-plugi
     window.onload = function()
     {
         tinyMCE.init({
-                mode : "exact",
-                elements : "$fieldId",
+                mode : "specific_textareas",
+                editor_selector : "tinyMCETextArea",
                 theme : "advanced",
 
                 relative_urls : false,
@@ -38,6 +38,6 @@ $webResourceManager.requireResource("com.garyhodgson.jira.tinymce-renderer-plugi
     };
 </script>
 
-<textarea name="$fieldId" id="$fieldId" >
+<textarea name="$fieldId" id="$fieldId" class="tinyMCETextArea">
 $textutils.htmlEncode($!value)
 </textarea>
