@@ -8,7 +8,9 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-var themeBaseURL = tinyMCEPopup.editor.baseURI.toAbsolute('themes/' + tinyMCEPopup.getParam("theme"));
+// ** Modified from the original by Gary Hodgson for Jira Plugin
+var themeBaseURL = (tinyMCEPopup.editor.baseURI == null)? "" : tinyMCEPopup.editor.baseURI.toAbsolute('themes/' + tinyMCEPopup.getParam("theme"));
+// ** End Modification
 
 function getColorPickerHTML(id, target_form_element) {
 	var h = "";

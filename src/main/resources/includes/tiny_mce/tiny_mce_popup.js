@@ -5,6 +5,7 @@
 var tinymce=null,tinyMCEPopup,tinyMCE;
 tinyMCEPopup={
     init:function(){
+
         var b=this,a,c;
         a=b.getWin();
         tinymce=a.tinymce;
@@ -14,18 +15,37 @@ tinyMCEPopup={
         if (tinymce == null){
             tinymce = tinyMCE
         }
-        // ** End Modification
+        if (tinymce == null){
 
+            tinymce = ietinymce
+        }
+        if (tinyMCE == null){
+
+            tinyMCE = ietinymce
+        }
 
         b.editor=tinymce.EditorManager.activeEditor;
-
-        b.params=b.editor.windowManager.params;
-        b.features=b.editor.windowManager.features;
-        b.dom=b.editor.windowManager.createInstance("tinymce.dom.DOMUtils",document);
-        if(b.features.popup_css!==false){
-            b.dom.loadCSS(b.features.popup_css||b.editor.settings.popup_css)
-        }
-        b.listeners=[];
+        
+        if (b.editor != null){
+	        b.params=b.editor.windowManager.params;
+	        b.features=b.editor.windowManager.features;
+	        b.dom=b.editor.windowManager.createInstance("tinymce.dom.DOMUtils",document);
+	        if(b.features.popup_css!==false){
+	            b.dom.loadCSS(b.features.popup_css||b.editor.settings.popup_css)
+	        }
+	        b.editor.windowManager.onOpen.dispatch(b.editor.windowManager,window)
+	    } else {
+	    	
+	    	b.editor = {};
+	    	b.editor.active = false;
+	    	b.editor.baseURI = null;
+	    	b.editor.dom = null;
+	    	b.params=[];
+	    	b.features=[];
+	    	b.dom=null;
+	    }
+	    
+	    b.listeners=[];
         b.onInit={
             add:function(e,d){
                 b.listeners.push({
@@ -37,7 +57,8 @@ tinyMCEPopup={
 
         b.isWindow=!b.getWindowArg("mce_inline");
         b.id=b.getWindowArg("mce_window_id");
-        b.editor.windowManager.onOpen.dispatch(b.editor.windowManager,window)
+        
+        // ** End Modification
 
     },
     getWin:function(){
@@ -48,7 +69,8 @@ tinyMCEPopup={
         return tinymce.is(a)?a:b
     },
     getParam:function(b,a){
-        return this.editor.getParam(b,a)
+    	// ** Modified from the original by Gary Hodgson for Jira Plugin
+        return (this.editor.getParam == undefined)? null :  this.editor.getParam(b,a);
     },
     getLang:function(b,a){
         return this.editor.getLang(b,a)
@@ -134,6 +156,9 @@ tinyMCEPopup={
         var b=tinyMCEPopup,d=document.title,e,c,a;
         if(b.domLoaded){
             return
+        }
+        if (b.editor.active != undefined && !b.editor.active){
+        	return;
         }
         b.domLoaded=1;
         if(b.features.translate_i18n!==false){
