@@ -66,7 +66,6 @@
 					// so this logic will basically only be executed on older IE versions
 					if (base && t.baseURL.indexOf('://') == -1 && t.baseURL.indexOf('/') !== 0)
 						t.baseURL = base + t.baseURL;
-
 					return t.baseURL;
 				}
 
@@ -437,6 +436,11 @@
 
 	// Expose tinymce namespace to the global namespace (window)
 	win.tinymce = win.tinyMCE = tinymce;
+	
+	// ** Modified from the original by Gary Hodgson for Jira Plugin
+	ietinymce = tinymce;
+	// End Modification
+	
 })(window);
 
 
