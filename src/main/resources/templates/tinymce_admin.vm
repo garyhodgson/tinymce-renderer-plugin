@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>TinyMCE Renderer Administration</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="expires" content="-1">
+        <meta name="decorator" content="admin" />
+
+        <link type="text/css" rel="StyleSheet" media="all" href="/styles/combined.css"/>
+        <link type="text/css" rel="StyleSheet" media="all" href="/styles/global.css" />
+    </head>
+
+    <body>
+        <div style="background: #FFFFFF">
+            <form action="$req.contextPath/secure/admin/TinyMCERendererAdminAction!saveConfiguration.jspa">
+                <input type="hidden" name="atl_token" value="$atl_token" />
+                <table class="jiraform maxWidth grid">
+                    <tr>
+                        <td colspan="3" class="jiraformheader">
+                            <h3 class="formtitle">TinyMCE Renderer Plugin Administration</h3>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3"></td>
+                    </tr>
+
+                    <tr>
+                        <td width="20%">Render Wiki Text</td>
+                        <td class="jiraformbody fieldValueArea">
+                            <input type=checkbox name="renderWikiText" #if ($action.getRenderWikiText()) checked #end >
+                        </td>
+                        <td>Fields that are already stored in Wiki format will be rendered as HTML.  
+                            <br>
+                            <strong>Warning!</strong>  Editing a field will permanently transform the field from Wiki format to HTML. <strong>This is not reversable!</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3" class="jiraformbody">
+                            <div style="text-align:center"><input type="submit" name="Submit" id="Submit" value="Save" accesskey="S" title="Press Ctrl+S to submit form" class="spaced" /></div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            #if ($action.hasAnyErrors())
+            <table width=100% cellpadding=10 cellspacing=0 border=0>
+                #foreach ($error in $action.getErrorMessages())
+                <tr>
+                    <td bgcolor=ffcccc><pre>$error</pre></td>
+                </tr>
+                #end
+                #foreach ($error in $action.errors)
+                <tr>
+                    <td bgcolor=ffcccc><pre>$error</pre></td>
+                </tr>
+                #end
+            </table>
+            #end
+
+            <br>
+
+            <table class="maxWidth grid" width=100% cellpadding=10 cellspacing=0 border=0>
+                <tr>
+                    <td>Please take note of the following part of the <a href="http://www.opensource.org/licenses/bsd-license.php" target="_blank">BSD</a> license that this plugin is released under:</td>
+                </tr>
+                <tr>
+                    <td bgcolor=F0FFF0>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
