@@ -11,6 +11,30 @@
         <java-version min="1.5"/>
     </jira-renderer>
 
+    <resource name="common-18n" type="i18n" location="plugin"/>
+
+    <web-section key="tinymce-plugins-section" name="Plugins Admin" location="system.admin" weight="1100">
+        <description>TinyMCE Plugin Administration</description>
+        <label key="com.garyhodgson.jira.plugins.web-section.label"/>
+    </web-section>
+
+    <web-item key="tinymceadmin" name="TinyMCE Plugin" section="system.admin/tinymce-plugins-section" weight="10">
+        <description>TinyMCE Plugin Config Link</description>
+        <label key="com.garyhodgson.jira.plugins.web-config.label"/>
+        <link linkId="com.garyhodgson.jira.plugins.tinymce.link">/secure/admin/TinyMCERendererAdminAction!default.jspa?atl_token=${atl_token}</link>
+    </web-item>
+
+    <webwork1 key="tinymceadminwebworks" name="Administer TinyMCE Renderer" class="java.lang.Object">
+        <description>Adds a new action to administer the tinymce settings.</description>
+        <actions>
+            <action name="com.garyhodgson.jira.renderer.tinymce.TinyMCERendererAdminAction" alias="TinyMCERendererAdminAction" roles-required="admin">
+                <view name="input">/templates/tinymce_admin.vm</view>
+                <view name="success">/templates/tinymce_admin.vm</view>
+                <view name="error">/templates/tinymce_admin.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
     <web-resource key="tinymce" name="TinyMCE" >
         <resource type="download" name="tiny_mce.js" location="includes/tiny_mce/tiny_mce_src.js"><param name="batch" value="false"/></resource>
         <resource type="download" name="langs/en.js" location="includes/tiny_mce/langs/en.js"><param name="batch" value="false"/></resource>
@@ -89,5 +113,5 @@
         <resource type="download" name="plugins/paste/pastetext.htm" location="includes/tiny_mce/plugins/paste/pastetext.htm"><param name="batch" value="false"/></resource>
         <resource type="download" name="plugins/paste/pasteword.htm" location="includes/tiny_mce/plugins/paste/pasteword.htm"><param name="batch" value="false"/></resource>
 
-</web-resource>
+    </web-resource>
 </atlassian-plugin>
