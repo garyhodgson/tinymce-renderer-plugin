@@ -17,7 +17,7 @@ margin:8px 8px 0 8px;
 .tinymce_dialog html {background:#F0F0EE;}
 .tinymce_dialog td {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px;}
 .tinymce_dialog textarea {resize:none;outline:none;}
-.tinymce_dialog a:link, a:visited {color:black;}
+.tinymce_dialog a:link, .tinymce_dialog a:visited {color:black;}
 .tinymce_dialog a:hover {color:#2B6FB6;}
 .tinymce_dialog .nowrap {white-space: nowrap}
 
@@ -28,8 +28,8 @@ margin:8px 8px 0 8px;
 .tinymce_dialog label.invalid {color:#EE0000; display:inline;}
 .tinymce_dialog input.invalid {border:1px solid #EE0000;}
 .tinymce_dialog input {background:#FFF; border:1px solid #CCC;}
-.tinymce_dialog input, select, textarea {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px;}
-.tinymce_dialog input, select, textarea {border:1px solid #808080;}
+.tinymce_dialog input, .tinymce_dialog select, .tinymce_dialog textarea {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px;}
+.tinymce_dialog input, .tinymce_dialog select, .tinymce_dialog textarea {border:1px solid #808080;}
 .tinymce_dialog input.radio {border:1px none #000000; background:transparent; vertical-align:middle;}
 .tinymce_dialog input.checkbox {border:1px none #000000; background:transparent; vertical-align:middle;}
 .tinymce_dialog .input_noborder {border:0;}
@@ -93,7 +93,7 @@ float:left;
 .tinymce_dialog .properties .column2 {text-align:left;}
 
 /* Titles */
-.tinymce_dialog h1, h2, h3, h4 {color:#2B6FB6; margin:0; padding:0; padding-top:5px;}
+.tinymce_dialog h1, .tinymce_dialog h2, .tinymce_dialog h3, .tinymce_dialog h4 {color:#2B6FB6; margin:0; padding:0; padding-top:5px;}
 .tinymce_dialog h3 {font-size:14px;}
 .tinymce_dialog .title {font-size:12px; font-weight:bold; color:#2B6FB6;}
 
