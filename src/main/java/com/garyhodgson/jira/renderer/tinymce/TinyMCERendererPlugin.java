@@ -24,6 +24,11 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     }
 
     public String render(String s, IssueRenderContext issueRenderContext) {
+
+        if (!s.startsWith("<")) {
+            s = s.replaceAll("\n", "<br>");
+        }
+
         StringBuilder text = new StringBuilder();
         text.append(LINE_SEPARATOR).append(LINE_SEPARATOR);
         text.append(JiraKeyUtils.linkBugKeys(s));
@@ -36,7 +41,15 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     }
 
     public Object transformForEdit(Object obj) {
-        return obj;
+        if (obj == null) {
+            return obj;
+        }
+
+        String s = (String) obj;
+        if (!s.startsWith("<")) {
+            s = s.replaceAll("\n", "<br>");
+        }
+        return s;
     }
 
     public Object transformFromEdit(Object obj) {
