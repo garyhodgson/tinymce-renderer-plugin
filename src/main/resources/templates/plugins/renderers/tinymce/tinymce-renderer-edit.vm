@@ -36,7 +36,10 @@ $webResourceManager.requireResource("com.garyhodgson.jira.tinymce-renderer-plugi
             table_cell_limit : 1000,
             table_default_border : 1,
             table_default_cellpadding : 5,
-            table_default_cellspacing : 0
+            table_default_cellspacing : 0,
+
+            invalid_elements : "script,input,applet,embed,xml,style,object"
+
         });
 
         if (jQuery("\#comment-issue").length != 0) {
