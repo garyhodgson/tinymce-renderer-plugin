@@ -12,6 +12,9 @@
     </jira-renderer>
 
     <resource name="common-18n" type="i18n" location="plugin"/>
+    <component key="atlassianWikiRenderer" class="com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer" public="true">
+        <interface>com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin</interface>
+    </component>
 
     <web-section key="tinymce-plugins-section" name="Plugins Admin" location="system.admin" weight="1100">
         <description>TinyMCE Plugin Administration</description>

@@ -16,6 +16,14 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     private JiraRendererModuleDescriptor jiraRendererModuleDescriptor;
     private AtlassianWikiRenderer atlassianWikiRenderer;
 
+    public TinyMCERendererPlugin(AtlassianWikiRenderer atlassianWikiRenderer) {
+        this.atlassianWikiRenderer = atlassianWikiRenderer;
+    }
+
+    public void init(JiraRendererModuleDescriptor jiraRendererModuleDescriptor) {
+        this.jiraRendererModuleDescriptor = jiraRendererModuleDescriptor;
+    }
+    
     public JiraRendererModuleDescriptor getDescriptor() {
         return jiraRendererModuleDescriptor;
     }
@@ -24,11 +32,6 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
         return TYPE;
     }
 
-    public void init(JiraRendererModuleDescriptor jiraRendererModuleDescriptor) {
-        this.jiraRendererModuleDescriptor = jiraRendererModuleDescriptor;
-        this.atlassianWikiRenderer = new AtlassianWikiRenderer();
-
-    }
 
     public String render(String s, IssueRenderContext issueRenderContext) {
 
