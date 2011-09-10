@@ -1,5 +1,7 @@
 package com.garyhodgson.jira.renderer.tinymce;
 
+import com.atlassian.core.util.HTMLUtils;
+import com.atlassian.event.api.EventPublisher;
 import com.atlassian.jira.config.properties.PropertiesManager;
 import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
@@ -16,14 +18,14 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     private JiraRendererModuleDescriptor jiraRendererModuleDescriptor;
     private AtlassianWikiRenderer atlassianWikiRenderer;
 
-    public TinyMCERendererPlugin(AtlassianWikiRenderer atlassianWikiRenderer) {
-        this.atlassianWikiRenderer = atlassianWikiRenderer;
+    public TinyMCERendererPlugin(EventPublisher eventPublisher) {
+        this.atlassianWikiRenderer = new AtlassianWikiRenderer(eventPublisher);
     }
 
     public void init(JiraRendererModuleDescriptor jiraRendererModuleDescriptor) {
         this.jiraRendererModuleDescriptor = jiraRendererModuleDescriptor;
     }
-    
+
     public JiraRendererModuleDescriptor getDescriptor() {
         return jiraRendererModuleDescriptor;
     }
@@ -32,14 +34,12 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
         return TYPE;
     }
 
-
     public String render(String s, IssueRenderContext issueRenderContext) {
 
         if (renderWikiText() && !s.startsWith("<")) {
             s = atlassianWikiRenderer.render(s, issueRenderContext);
         }
         s = transformLineBreaks(s);
-
 
         StringBuilder text = new StringBuilder();
         text.append(LINE_SEPARATOR).append(LINE_SEPARATOR);
@@ -48,17 +48,11 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
         return text.toString();
     }
 
-    private boolean renderWikiText() throws PropertyException {
-        PropertySet properties = PropertiesManager.getInstance().getPropertySet();
-        return properties.getBoolean(TinyMCERendererAdminAction.RENDER_WIKI_TEXT_PROPERTY);
-    }
-
     public String renderAsText(String s, IssueRenderContext issueRenderContext) {
-        return s;
+        return HTMLUtils.stripTags(s);
     }
 
     public Object transformForEdit(Object obj) {
-
         if (obj == null) {
             return obj;
         }
@@ -75,6 +69,11 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
     public Object transformFromEdit(Object obj) {
         return obj;
+    }
+
+    private boolean renderWikiText() throws PropertyException {
+        PropertySet properties = PropertiesManager.getInstance().getPropertySet();
+        return properties.getBoolean(TinyMCERendererAdminAction.RENDER_WIKI_TEXT_PROPERTY);
     }
 
     private String transformLineBreaks(String s) {

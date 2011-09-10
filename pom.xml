@@ -51,6 +51,7 @@
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>
                     <!--<productDataPath>${basedir}/src/test/resources/generated-test-resources.zip</productDataPath>-->
+                    <productDataPath>${basedir}/src/test/resources/generated-test-resources-4.4.zip</productDataPath>
                 </configuration>
             </plugin>
             <plugin>
