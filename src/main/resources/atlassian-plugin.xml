@@ -36,10 +36,15 @@
     </webwork1>
 
     <web-resource key="tinymce" name="TinyMCE" >
+        <context>atl.general</context>
+        
         <resource type="download" name="tiny_mce.js" location="includes/tiny_mce/tiny_mce_src.js"><param name="batch" value="false"/></resource>
         <resource type="download" name="langs/en.js" location="includes/tiny_mce/langs/en.js"><param name="batch" value="false"/></resource>
         <resource type="download" name="tiny_mce_popup.js" location="includes/tiny_mce/tiny_mce_popup.js"><param name="batch" value="false"/></resource>
-        
+        <resource type="download" name="jquery.tinymce.js" location="includes/tiny_mce/jquery.tinymce.js"><param name="batch" value="false"/></resource>
+
+        <resource type="download" name="tinymcerenderer_listener.js" location="includes/tinymcerenderer_listener.js"><param name="batch" value="false"/></resource>
+
         <resource type="download" name="themes/advanced/editor_template.js" location="includes/tiny_mce/themes/advanced/editor_template.js"><param name="batch" value="false"/></resource>
         <resource type="download" name="themes/advanced/skins/default/content.css" location="includes/tiny_mce/themes/advanced/skins/default/content.css"><param name="batch" value="false"/></resource>
         <resource type="download" name="themes/advanced/skins/default/dialog.css" location="includes/tiny_mce/themes/advanced/skins/default/dialog.css"><param name="batch" value="false"/></resource>
