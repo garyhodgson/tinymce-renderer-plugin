@@ -46,9 +46,6 @@ jQuery(document).ready(function() {
         dialog_type : "modal",
         invalid_elements : "script,input,applet,embed,xml,style,object"
     }
-        
-    // We seem to have to unbind previous handlers. I'm not sure why it is bound twice.
-    jQuery(document).unbind('dialogContentReady');
     
     // Bind the init function so it runs when the dialog loads
     jQuery(document).bind('dialogContentReady', function (e, dialog) {
