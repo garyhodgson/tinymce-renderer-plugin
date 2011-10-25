@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.garyhodgson.jira</groupId>
     <artifactId>tinymce-renderer-plugin</artifactId>
-    <version>1.5.3</version>
+    <version>1.5.4</version>
 
     <name>tinymce-renderer-plugin</name>
     <description>Provides a wysiwyg textarea renderer using the TinyMCE Editor.</description>
@@ -65,8 +65,8 @@
     </build>
 
     <properties>
-        <jira.version>4.4</jira.version>
-        <jira.data.version>4.4</jira.data.version>
+        <jira.version>5.0-beta2</jira.version>
+        <jira.data.version>5.0-beta2</jira.data.version>
     </properties>
 
 </project>

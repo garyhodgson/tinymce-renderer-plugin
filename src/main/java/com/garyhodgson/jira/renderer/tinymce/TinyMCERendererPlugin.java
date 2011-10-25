@@ -2,6 +2,7 @@ package com.garyhodgson.jira.renderer.tinymce;
 
 import com.atlassian.core.util.HTMLUtils;
 import com.atlassian.event.api.EventPublisher;
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.config.properties.PropertiesManager;
 import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
@@ -17,9 +18,12 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private JiraRendererModuleDescriptor jiraRendererModuleDescriptor;
     private AtlassianWikiRenderer atlassianWikiRenderer;
+    private PropertySet properties;
 
     public TinyMCERendererPlugin(EventPublisher eventPublisher) {
         this.atlassianWikiRenderer = new AtlassianWikiRenderer(eventPublisher);
+         PropertiesManager propertiesManager = ComponentManager.getComponent(PropertiesManager.class);
+         this.properties = propertiesManager.getPropertySet();
     }
 
     public void init(JiraRendererModuleDescriptor jiraRendererModuleDescriptor) {
@@ -72,7 +76,6 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     }
 
     private boolean renderWikiText() throws PropertyException {
-        PropertySet properties = PropertiesManager.getInstance().getPropertySet();
         return properties.getBoolean(TinyMCERendererAdminAction.RENDER_WIKI_TEXT_PROPERTY);
     }
 

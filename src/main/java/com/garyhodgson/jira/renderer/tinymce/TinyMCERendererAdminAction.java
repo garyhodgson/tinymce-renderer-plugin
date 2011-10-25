@@ -1,5 +1,6 @@
 package com.garyhodgson.jira.renderer.tinymce;
 
+import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.config.properties.PropertiesManager;
 import com.atlassian.jira.security.xsrf.RequiresXsrfCheck;
 import com.atlassian.jira.web.action.JiraWebActionSupport;
@@ -13,7 +14,8 @@ public class TinyMCERendererAdminAction extends JiraWebActionSupport {
     private PropertySet properties;
 
     public TinyMCERendererAdminAction() {
-        properties = PropertiesManager.getInstance().getPropertySet();
+        PropertiesManager propertiesManager = ComponentManager.getComponent(PropertiesManager.class);
+        this.properties = propertiesManager.getPropertySet();
     }
 
     @RequiresXsrfCheck
