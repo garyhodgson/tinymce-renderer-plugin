@@ -30,6 +30,12 @@
 			</h2>
 			<p> 
 				<ul>
+					<li><a name="release_1_5_5" href="https://github.com/garyhodgson/tinymce-renderer-plugin/raw/master/dist/tinymce-renderer-plugin-1.5.5.jar">tinymce-renderer-plugin-1.5.5.jar</a> (27th October 2011)</li>
+					<ul>
+						<li>Bug fix where Null Pointer Exception was thrown when field is not set (possibly introduced in Jira 5's use of dialogs to create new issues).</li>
+						<li>Reintroduced most toolbar options in the dialog version of the editor as Jira 5 makes heavy use of dialogs, e.g. for editing an issue.  When the dialog is too small for the editor the fullscreen icon is now to the far left which allows all toobar options to be seen.</li>
+					</ul>
+
 					<li><a name="release_1_5_4" href="https://github.com/garyhodgson/tinymce-renderer-plugin/raw/master/dist/tinymce-renderer-plugin-1.5.4.jar">tinymce-renderer-plugin-1.5.4.jar</a> (25th October 2011)</li>
 					<ul>
 						<li>Updated to be compatible with Jira 5.0. Is backwards compatible with 4.x hence the minor version number update.</li>
@@ -212,6 +218,9 @@
 			<h3><a name="adding_an_image"></a>Adding an image</h3>
 			<p> 
 				Images cannot be directly uploaded using the TinyMCE editor. Instead, upload the image to the issue, make a note of the URL, and use this in the image popup.
+			</p>
+			<p> 
+				Update: It seems that Firefox allows you to paste an image from your clipboard directly into the editor!  Keep in mind that the image data is stored in the database, not in the attachments folder.
 			</p>
 			<img src="images/3_Noting_Image_URL.png" width="500px" alt="Noting Image URL">
 			<img src="images/4_Adding_Image.png" width="500px" alt="Adding Image">
