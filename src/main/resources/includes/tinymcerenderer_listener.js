@@ -1,8 +1,7 @@
 jQuery(document).ready(function() {
 
     var tinyMCEConfigAdvanced = {
-        theme : "advanced",
-            
+        theme : "advanced",            
         relative_urls : false,
         remove_script_host : false,
         body_class : "mceEditor",
@@ -31,8 +30,8 @@ jQuery(document).ready(function() {
         relative_urls : false,
         remove_script_host : false,
         body_class : "mceEditor",
-        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist",
-        theme_advanced_buttons2 : "",
+        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,|,formatselect,fontselect,fontsizeselect",
+        theme_advanced_buttons2 : "fullscreen,|,forecolor,backcolor,|,tablecontrols,|,hr,removeformat,visualaid,sub,sup,charmap,|,preview,cleanup,code",
         theme_advanced_buttons3 : "",
         theme_advanced_buttons4 : "",
         theme_advanced_toolbar_location : "top",
@@ -42,7 +41,7 @@ jQuery(document).ready(function() {
         theme_advanced_resizing_use_cookie : true,
         theme_advanced_path : false,
         theme_advanced_statusbar_location : "",
-        plugins : "contextmenu",
+        plugins : "table,fullscreen,preview,contextmenu,inlinepopups,paste",
         dialog_type : "modal",
         invalid_elements : "script,input,applet,embed,xml,style,object"
     }

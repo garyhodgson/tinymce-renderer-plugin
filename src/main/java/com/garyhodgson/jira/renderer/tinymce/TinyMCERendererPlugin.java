@@ -40,6 +40,10 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
     public String render(String s, IssueRenderContext issueRenderContext) {
 
+        if (s == null){
+            return "";
+        }
+        
         if (renderWikiText() && !s.startsWith("<")) {
             s = atlassianWikiRenderer.render(s, issueRenderContext);
         }
