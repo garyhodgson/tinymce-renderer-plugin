@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+		<title>
+			garyhodgson/tinymce-renderer-plugin @ GitHub - Reverting from TinyMCE
+		</title>
+	</head>
+	<body>
+		<div id="container">
+			<h1>
+				<a href="http://github.com/garyhodgson/tinymce-renderer-plugin">tinymce-renderer-plugin</a>
+			</h1>
+	
+			<h2><a name="reverting"></a>
+				Reverting from TinyMCE to plain text.
+			</h2>
+			<br>
+			<h3><a name="overview"></a>Overview</h3>
+			<div >
+				<p>Should you decide after using the plugin that you no longer wish to do so you will find that your fields are stored in HTML.  Working with HTML may not be optimal for the users, and so the following describes a means to revert to standard text fields.</p>
+
+				<p><strong>Please be aware!</strong>  Moving from HTML to plain text will remove all formatting from the field and may result in poorly formatted text.  If you choose to strip out all HTML tags then some content may be lost, for example removing the img tag will remove all images from the field.</p>
+
+				<p><strong>Be 100% sure you know what you are doing if following these suggestions.  I cannot be held responsible for any loss or corruption of data.  Always perform regular backups and test the plugin in a separate environment fully before deploying to production.</strong></p>
+
+				<p>The steps below describe moving to a new renderer which can display existing HTML fields but uses a standard text editor when editing the file.  This means that the content of existing issues remains unchanged <i>until</i> the issue is next edited.  Three options exist to decide what amount of tags should be removed:
+				<ul>
+				<li>All: All tags will be removed.</li>
+				<li>Some: Most tags will be removed except table and image tags. This is to help maintain the layout of existing issues which have these tags.</li>
+				<li>None: No tags will be removed which allows the user to modify existing html and write plain text in new issues.</li>
+				</ul>
+				<p>The solution presented here does <b>not</b> change the issues in bulk, nor will it move the issues to Wiki Rendering. It is not planned to create such a process.</p>
+
+			</div>
+
+			<br>
+			<h3><a name="choosing_the_renderer"></a>Choosing the renderer</h3>
+			<p> 
+				For the field you wish to revert select the "TinyMCE Renderer - Reverse" renderer from the drop down list
+			</p>
+			<a href="images/reverting_chooserenderer.png"><img src="images/reverting_chooserenderer.png" width="500px" alt="Choosing the renderer"></a>
+
+			<br>
+			<h3><a name="choosing_the_amount_of_tags_to_remove"></a>Choosing the amount of tags to remove</h3>
+			<p> 
+				From the plugin admin page choose how much of the HTML tags to strip.
+				<ul>
+				<li>All: All tags will be removed.</li>
+				<li>Some: Most tags will be removed except table and image tags. This is to help maintain the layout of existing issues which have these tags.</li>
+				<li>None: No tags will be removed which allows the user to modify existing html and write plain text in new issues.</li>
+				</ul>
+
+				It is highly recommended to select <i>Some</i> or <i>None</i>.
+			</p>
+			<a href="images/reverting_choosetagstripoption.png"><img src="images/reverting_choosetagstripoption.png" width="500px" alt="Choosing the amount of tags to remove"></a>
+
+			<br>
+			<h3><a name="editing_the_field_no_tags_stripped"></a>Editing the field - No tags stripped</h3>
+			<p> 
+				The screenshot below shows the rendered description field as edited by TinyMCE.  Note the inclusion of a table, image and centered text.
+			</p>
+			<a href="images/reverting_originaltinymcefield.png"><img src="images/reverting_originaltinymcefield.png" width="500px" alt="Original field"></a>
+			<p> 
+				Here is the field being edited. Note all html tags are present, but the TinyMCE editor is not activated. The resulting field is identical to the original.
+			</p>
+			<a href="images/reverting_nonetagoption.png"><img src="images/reverting_nonetagoption.png" width="500px" alt="Editing the field - No tags stripped"></a>
+			
+			<br>
+			<h3><a name="editing_the_field_some_tags_stripped"></a>Editing the field - Some tags stripped</h3>
+			<p> 
+				The following shows the field being edited with the "Some" tags stripped option.  Note the table and img tags remain, but the others are removed.
+			</p>
+			<a href="images/reverting_sometagoption.png"><img src="images/reverting_sometagoption.png" width="500px" alt="Editing the field - Some tags stripped"></a>
+			<p> 
+				Here is the rendered field. Note the table and image remain intact.
+			</p>
+			<a href="images/reverting_sometagoptionresult.png"><img src="images/reverting_sometagoptionresult.png" width="500px" alt="Editing the field - Some tags stripped - Result"></a>
+
+			<br>
+			<h3><a name="editing_the_field_all_tags_stripped"></a>Editing the field - All tags stripped</h3>
+			<p> 
+				Finally, the following shows the field being edited with the "All" tags stripped option.  Note that all tags are completely removed.
+			</p>
+			<a href="images/reverting_alltagoption.png"><img src="images/reverting_alltagoption.png" width="500px" alt="Editing the field - All tags stripped"></a>
+			<p> 
+				Here is the rendered field.  Note that the formatting is sub-optimal. Some manual editing will be required to improve the layout.
+			</p>
+			<a href="images/reverting_alltagoptionresult.png"><img src="images/reverting_alltagoptionresult.png" width="500px" alt="Editing the field - All tags stripped - Result"></a>
+			
+
+		</div>
+	</body>
+</html>
