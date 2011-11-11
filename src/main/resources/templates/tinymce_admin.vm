@@ -37,6 +37,19 @@
                     </tr>
 
                     <tr>
+                        <td width="20%">TinyMCE Renderer Reverse - Strip Tags</td>
+                        <td class="jiraformbody fieldValueArea">
+                            <input type=radio name="stripTags" value="All" #if ($action.getStripAllTags()) checked #end >&nbsp;All<br/>
+                            <input type=radio name="stripTags" value="Some" #if ($action.getStripSomeTags()) checked #end >&nbsp;Some<br/>
+                            <input type=radio name="stripTags" value="None" #if ($action.getStripNoTags()) checked #end >&nbsp;None
+                        </td>
+                        <td>When using the "TinyMCE Renderer - Reverse" renderer to transform the field contents from HTML to plain text this setting decides which tags to remove when editing the field.
+                            <br> Choosing "Some" removes all tags except the following: table, img.
+                            <br> <strong>Warning!</strong> Removing HTML tags will result in loss of formatting and possible loss of content, for example: image tags will be stripped and therefore the images will be removed.</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td colspan="3" class="jiraformbody">
                             <div style="text-align:center"><input type="submit" name="Submit" id="Submit" value="Save" accesskey="S" title="Press Ctrl+S to submit form" class="spaced" /></div>
                         </td>

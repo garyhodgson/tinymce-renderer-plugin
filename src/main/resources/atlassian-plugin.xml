@@ -10,6 +10,12 @@
         <resource type="velocity" name="edit" location="templates/plugins/renderers/tinymce/tinymce-renderer-edit.vm"/>
         <java-version min="1.5"/>
     </jira-renderer>
+    
+    <jira-renderer key="tinymce-renderer-reverse" name="TinyMCE Renderer - Reverse" class="com.garyhodgson.jira.renderer.tinymce.TinyMCERendererReversePlugin">
+        <description>Reverses html tags created by TinyMCE plugin back to plaintext. This WILL remove all formatting - please test before using.</description>
+        <resource type="velocity" name="edit" location="templates/plugins/renderers/text/text-renderer-edit.vm"/> 
+        <java-version min="1.5"/>
+    </jira-renderer>
 
     <resource name="common-18n" type="i18n" location="plugin"/>
     
@@ -39,7 +45,6 @@
 
     <web-resource key="tinymce" name="TinyMCE" >
         <context>atl.general</context>
-        
 
         <resource type="download" name="tiny_mce.js" location="includes/tiny_mce/tiny_mce_src.js"><param name="batch" value="false"/></resource>
         <resource type="download" name="langs/en.js" location="includes/tiny_mce/langs/en.js"><param name="batch" value="false"/></resource>
