@@ -1,0 +1,79 @@
+<div class="issue-data-block" id="changehistory-$changehistory.id">
+    <div class="actionContainer">
+        <div class="action-details" id="changehistorydetails_$changehistory.id">
+        <a name="action_$changehistory.id" />
+            #set ($param2 = " - <span class='date' title='$changehistory.createdDateHtml'><time datetime='$changehistory.createdDateIso8601Html'>$changehistory.createdDateHtml</time></span>")
+
+            $i18n.getText('viewissue.changehistory.changeby', $userformat.formatUser($changehistory.username, 'profileLinkActionHeader', "changehistoryauthor_$!{changehistory.id}"), $param2)
+        </div>
+        <div class="changehistory action-body">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" id="changehistory_$!{changehistory.id}">
+            #if ($changehistory.showHeader)
+                <thead>
+                    <tr>
+                        <th width="20%">$i18n.getText('viewissue.changehistory.field')</th>
+                        <th width="40%">$i18n.getText('viewissue.changehistory.origvalue')</th>
+                        <th width="40%">$i18n.getText('viewissue.changehistory.newvalue')</th>
+                    </tr>
+                </thead>
+            #end
+            <tbody>
+            #foreach ($changeitem in $changehistory.changeItems)
+                #set ($fieldName = $changeitem.getString('field'))
+                #set ($isDateField = $changehistory.isDateField($fieldName))
+                <tr>
+                <td width="20%" class="activity-name">
+                #if ( $changeitem.getString("fieldtype").toLowerCase().equals("custom") )
+                    $fieldName
+                #else
+                    #set ($fieldName = $stringUtils.replaceAll($fieldName, " ", "").toLowerCase())
+                    $i18n.getText("issue.field.$fieldName")
+                #end
+                </td>
+                <td width="40%" class="activity-old-val">
+                #if ($changeitem.getString('oldstring'))
+                    #if (($fieldName.equals("timeoriginalestimate") || $fieldName.equals("timeestimate") || $fieldName.equals("timespent")) && $changeitem.getString('oldvalue'))
+                        $changehistory.getPrettyDuration($changeitem.getString('oldvalue'))
+                    #elseif ($isDateField == true)
+                        $changehistory.formatDateValue($changeitem.getString('oldvalue'), $changeitem.getString('oldstring'), $fieldName)
+                    #else
+                        $!jirakeyutils.linkBugKeys($changeitem.getString('oldstring'))
+                    #end
+                #end
+                #if ($changeitem.getString('oldvalue') && $isDateField == false)
+                    #set ($valueLength = $changeitem.getString('oldvalue').length())
+                    #if ($valueLength > 0)
+                        <span class="hist-value">[#makelinkedhtml($changeitem.getString('oldvalue'))]</span>
+                    #end
+                #end
+                </td>
+                <td width="40%" class="activity-new-val">
+                #if ($changeitem.getString('newstring'))
+                    #if (($fieldName.equals("timeoriginalestimate") || $fieldName.equals("timeestimate") || $fieldName.equals("timespent")) && $changeitem.getString('newvalue'))
+                        $changehistory.getPrettyDuration($changeitem.getString('newvalue'))
+                    #elseif ($fieldName.equals("attachment"))
+                        #if ($changehistory.isAttachmentValid($changeitem.getString('newvalue')))
+                            <a href="${requestContext.baseUrl}/secure/attachment/$changeitem.getString('newvalue')/$changeitem.getString('newstring')">$changeitem.getString('newstring')</a>
+                        #else
+                            $changeitem.getString('newstring')
+                        #end
+                    #elseif ($isDateField == true)
+                        $changehistory.formatDateValue($changeitem.getString('newvalue'), $changeitem.getString('newstring'), $fieldName)
+                    #else
+                       $!jirakeyutils.linkBugKeys($changeitem.getString('newstring'))
+                    #end
+                #end
+                #if ($changeitem.getString('newvalue') && $isDateField == false)
+                    #set ($valueLength = $changeitem.getString('newvalue').length())
+                    #if ($valueLength > 0)
+                       <span class="hist-value">[#makelinkedhtml($changeitem.getString('newvalue'))]</span>
+                    #end
+                #end
+                </td>
+                </tr>
+            #end
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

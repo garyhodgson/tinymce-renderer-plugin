@@ -1,0 +1,48 @@
+#if ($changelog)
+    <tr valign="top">
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 10px 10px 0;white-space:nowrap;">
+            <strong style="font-weight:normal;color:${textSubtleColour};">#text("template.change.by"):</strong>
+        </td>
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
+            #if ($changelog.getString("author"))
+                #authorlink2($changelog.getString("author") $linkstyle) abc
+            #else
+                #text("common.words.anonymous")
+            #end
+            ($dateformatter.formatDMYHMS($changelog.getTimestamp("created")))
+        </td>
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
+        </td>
+    </tr>
+    <tr valign="top">
+        <td>
+        </td>
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
+            <strong>Before:</strong>
+        </td>
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
+            <strong>After:</strong>
+        </td>
+    </tr>
+    #foreach ($changeitem in $changelog.getRelated("ChildChangeItem"))
+    #if(!$changeitem.getString("field").equals("WorklogTimeSpent") && !$changeitem.getString("field").equals("WorklogId"))
+    <tr valign="top">
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 10px 10px 0;white-space:nowrap;">
+            <strong style="font-weight:normal;color:${textSubtleColour};">$velocityhelper.getFieldName($changeitem, $i18n):</strong>
+        </td>
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
+            #if ($changeitem.getString("field") == "Comment") #set ($oldstringKey = "oldvalue") #set ($newstringKey = "newvalue")
+            #else #set ($oldstringKey = "oldstring") #set ($newstringKey = "newstring")
+            #end
+            $changeitem.getString($oldstringKey)
+        </td>
+        <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
+            #if ($changeitem.getString("field") == "Comment") #set ($oldstringKey = "oldvalue") #set ($newstringKey = "newvalue")
+            #else #set ($oldstringKey = "oldstring") #set ($newstringKey = "newstring")
+            #end
+            $changeitem.getString($newstringKey)
+        </td>
+    </tr>
+    #end
+    #end
+#end

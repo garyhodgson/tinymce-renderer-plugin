@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/master.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+		<title>
+			garyhodgson/tinymce-renderer-plugin @ GitHub - Modifying Templates
+		</title>
+	</head>
+	<body>
+		<div id="container">
+			<h1>
+				<a href="http://github.com/garyhodgson/tinymce-renderer-plugin">tinymce-renderer-plugin</a>
+			</h1>
+	
+			<h2><a name="reverting"></a>
+				Modifying Templates
+			</h2>
+			<br>
+			<h3><a name="overview"></a>Overview</h3>
+			<div >
+				<p>The plugin stores the formatted field as HTML.  This raw value is usually renderered through the plugin before being displayed, however there are several parts of Jira that use the raw value directly, for example Email notifications and the Change History tab.</p>
+
+				<a href="images/HTML_display_error.png"><img src="images/HTML_display_error.png" width="500px" alt="Example HTML tag display error"></a>
+
+				<p>Investigation revealed that there is no way for the renderer to affect the display of the field in these circumstances, and this was confirmed via the <a href="https://answers.atlassian.com/questions/9939/is-there-any-way-to-access-the-renderer-used-for-creating-the-changelog-for-jira-updated-email-notifications">query posted on Atlassian Answers.</a>  The solution is to modify the necessary velocity templates, which is described below.</p> 
+
+				<p>The templates presented here are valid for Jira 4.4. and 5.0.  They are only suggestions and can be modified to suite your requirements.  Note that care must be taken when updating your Jira instance as these changes must be reapplied afterwards.  Also, only html templates are shown.  Plain text templates could probably be modified in a similar way.</p>
+
+			</div>
+
+			<br>
+			<h3><a name="email_template"></a>Email Template</h3>
+			<p> 
+				Find the template in the following location : <pre>&lt;Jira Install Location&gt;\atlassian-jira\WEB-INF\classes\templates\email\html\includes\fields\changelog.vm</pre>
+			</p>
+			<p>
+				Replace, or manually update, the template with the contents of this file: <a href="files/changelog.vm">changelog.vm</a>  Note: Right Click and select download file, rather than copying from the browser as it contains html.  This will result in an email notification as shown below:
+			</p>
+			<a href="images/modifyingtemplates_email.png"><img src="images/modifyingtemplates_email.png" width="500px" alt="Email Template"></a>
+
+
+			<br>
+			<h3><a name="history_tab_template"></a>History Tab Template</h3>
+			<p> 
+				Find the template in the following location : <pre>&lt;Jira Install Location&gt;\atlassian-jira\WEB-INF\classes\templates\plugins\jira\issuetabpanels\changehistory.vm</pre>
+			</p>
+			<p>
+				Replace, or manually update, the template with the contents of this file: <a href="files/changehistory.vm">changehistory.vm</a>  Note: Right Click and select download file, rather than copying from the browser as it contains html.  This will result in a history tab formatted as follows:
+			</p>
+			<a href="images/modifyingtemplates_changehistorytab.png"><img src="images/modifyingtemplates_changehistorytab.png" width="500px" alt="History Tab Template"></a>
+
+		</div>
+	</body>
+</html>
