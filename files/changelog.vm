@@ -34,13 +34,13 @@
             #if ($changeitem.getString("field") == "Comment") #set ($oldstringKey = "oldvalue") #set ($newstringKey = "newvalue")
             #else #set ($oldstringKey = "oldstring") #set ($newstringKey = "newstring")
             #end
-            $changeitem.getString($oldstringKey)
+            $!changeitem.getString($oldstringKey)
         </td>
         <td style="color:${textColour};font-family:${textFontFamily};font-size:${textSize};padding:0 0 10px 0;width:50%;">
             #if ($changeitem.getString("field") == "Comment") #set ($oldstringKey = "oldvalue") #set ($newstringKey = "newvalue")
             #else #set ($oldstringKey = "oldstring") #set ($newstringKey = "newstring")
             #end
-            $changeitem.getString($newstringKey)
+            $!changeitem.getString($newstringKey)
         </td>
     </tr>
     #end
