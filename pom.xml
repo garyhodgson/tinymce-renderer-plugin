@@ -38,6 +38,11 @@
             <version>${jira.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.6.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,8 +69,8 @@
     </build>
 
     <properties>
-        <jira.version>4.3.2</jira.version>
-        <jira.data.version>4.3.2</jira.data.version>
+        <jira.version>4.3.4</jira.version>
+        <jira.data.version>4.3.4</jira.data.version>
     </properties>
 
 </project>

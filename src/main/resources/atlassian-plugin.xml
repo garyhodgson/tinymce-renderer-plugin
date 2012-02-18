@@ -1,3 +1,4 @@
+
 <atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
     <plugin-info>
         <description>${project.description}</description>
@@ -11,6 +12,12 @@
         <java-version min="1.5"/>
     </jira-renderer>
 
+    <jira-renderer key="tinymce-renderer-reverse" name="TinyMCE Renderer - Reverse" class="com.garyhodgson.jira.renderer.tinymce.TinyMCERendererReversePlugin">
+        <description>Reverses html tags created by TinyMCE plugin back to plaintext. This WILL remove all formatting - please test before using.</description>
+        <resource type="velocity" name="edit" location="templates/plugins/renderers/text/text-renderer-edit.vm"/> 
+        <java-version min="1.5"/>
+    </jira-renderer>
+    
     <resource name="common-18n" type="i18n" location="plugin"/>
 
     <web-section key="tinymce-plugins-section" name="Plugins Admin" location="system.admin" weight="1100">
@@ -38,85 +45,225 @@
     <web-resource key="tinymce" name="TinyMCE" >
         <context>atl.general</context>
         
-        <resource type="download" name="tiny_mce.js" location="includes/tiny_mce/tiny_mce_src.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="langs/en.js" location="includes/tiny_mce/langs/en.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="tiny_mce_popup.js" location="includes/tiny_mce/tiny_mce_popup.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="jquery.tinymce.js" location="includes/tiny_mce/jquery.tinymce.js"><param name="batch" value="false"/></resource>
+        <resource type="download" name="tiny_mce.js" location="includes/tiny_mce/tiny_mce_src.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="langs/en.js" location="includes/tiny_mce/langs/en.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="tiny_mce_popup.js" location="includes/tiny_mce/tiny_mce_popup.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="jquery.tinymce.js" location="includes/tiny_mce/jquery.tinymce.js">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="tinymcerenderer_listener.js" location="includes/tinymcerenderer_listener.js"><param name="batch" value="false"/></resource>
+        <resource type="download" name="tinymcerenderer_listener.js" location="includes/tinymcerenderer_listener.js">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="themes/advanced/editor_template.js" location="includes/tiny_mce/themes/advanced/editor_template.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/content.css" location="includes/tiny_mce/themes/advanced/skins/default/content.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/dialog.css" location="includes/tiny_mce/themes/advanced/skins/default/dialog.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/img/buttons.png" location="includes/tiny_mce/themes/advanced/skins/default/img/buttons.png"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/img/items.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/items.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/img/menu_arrow.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/img/menu_check.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/menu_check.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/img/progress.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/progress.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/img/tabs.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/tabs.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/skins/default/ui.css" location="includes/tiny_mce/themes/advanced/skins/default/ui.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/charmap.htm" location="includes/tiny_mce/themes/advanced/charmap.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/color_picker.htm" location="includes/tiny_mce/themes/advanced/color_picker.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/js/anchor.js" location="includes/tiny_mce/themes/advanced/js/anchor.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/js/charmap.js" location="includes/tiny_mce/themes/advanced/js/charmap.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/js/color_picker.js" location="includes/tiny_mce/themes/advanced/js/color_picker.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/js/image.js" location="includes/tiny_mce/themes/advanced/js/image.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/js/link.js" location="includes/tiny_mce/themes/advanced/js/link.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/js/source_editor.js" location="includes/tiny_mce/themes/advanced/js/source_editor.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/link.htm" location="includes/tiny_mce/themes/advanced/link.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/source_editor.htm" location="includes/tiny_mce/themes/advanced/source_editor.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/image.htm" location="includes/tiny_mce/themes/advanced/image.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/img/colorpicker.jpg" location="includes/tiny_mce/themes/advanced/img/colorpicker.jpg"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/img/icons.gif" location="includes/tiny_mce/themes/advanced/img/icons.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/langs/en.js" location="includes/tiny_mce/themes/advanced/langs/en.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="themes/advanced/langs/en_dlg.js" location="includes/tiny_mce/themes/advanced/langs/en_dlg.js"><param name="batch" value="false"/></resource>
+        <resource type="download" name="themes/advanced/editor_template.js" location="includes/tiny_mce/themes/advanced/editor_template.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/content.css" location="includes/tiny_mce/themes/advanced/skins/default/content.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/dialog.css" location="includes/tiny_mce/themes/advanced/skins/default/dialog.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/img/buttons.png" location="includes/tiny_mce/themes/advanced/skins/default/img/buttons.png">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/img/items.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/items.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/img/menu_arrow.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/menu_arrow.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/img/menu_check.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/menu_check.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/img/progress.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/progress.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/img/tabs.gif" location="includes/tiny_mce/themes/advanced/skins/default/img/tabs.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/skins/default/ui.css" location="includes/tiny_mce/themes/advanced/skins/default/ui.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/charmap.htm" location="includes/tiny_mce/themes/advanced/charmap.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/color_picker.htm" location="includes/tiny_mce/themes/advanced/color_picker.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/js/anchor.js" location="includes/tiny_mce/themes/advanced/js/anchor.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/js/charmap.js" location="includes/tiny_mce/themes/advanced/js/charmap.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/js/color_picker.js" location="includes/tiny_mce/themes/advanced/js/color_picker.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/js/image.js" location="includes/tiny_mce/themes/advanced/js/image.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/js/link.js" location="includes/tiny_mce/themes/advanced/js/link.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/js/source_editor.js" location="includes/tiny_mce/themes/advanced/js/source_editor.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/link.htm" location="includes/tiny_mce/themes/advanced/link.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/source_editor.htm" location="includes/tiny_mce/themes/advanced/source_editor.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/image.htm" location="includes/tiny_mce/themes/advanced/image.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/img/colorpicker.jpg" location="includes/tiny_mce/themes/advanced/img/colorpicker.jpg">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/img/icons.gif" location="includes/tiny_mce/themes/advanced/img/icons.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/langs/en.js" location="includes/tiny_mce/themes/advanced/langs/en.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="themes/advanced/langs/en_dlg.js" location="includes/tiny_mce/themes/advanced/langs/en_dlg.js">
+            <param name="batch" value="false"/>
+        </resource>
         
-        <resource type="download" name="utils/editable_selects.js" location="includes/tiny_mce/utils/editable_selects.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="utils/form_utils.js" location="includes/tiny_mce/utils/form_utils.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="utils/mctabs.js" location="includes/tiny_mce/utils/mctabs.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="utils/validate.js" location="includes/tiny_mce/utils/validate.js"><param name="batch" value="false"/></resource>
+        <resource type="download" name="utils/editable_selects.js" location="includes/tiny_mce/utils/editable_selects.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="utils/form_utils.js" location="includes/tiny_mce/utils/form_utils.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="utils/mctabs.js" location="includes/tiny_mce/utils/mctabs.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="utils/validate.js" location="includes/tiny_mce/utils/validate.js">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="plugins/table/cell.htm" location="includes/tiny_mce/plugins/table/cell.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/css/cell.css" location="includes/tiny_mce/plugins/table/css/cell.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/css/row.css" location="includes/tiny_mce/plugins/table/css/row.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/css/table.css" location="includes/tiny_mce/plugins/table/css/table.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/editor_plugin.js" location="includes/tiny_mce/plugins/table/editor_plugin.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/js/cell.js" location="includes/tiny_mce/plugins/table/js/cell.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/js/merge_cells.js" location="includes/tiny_mce/plugins/table/js/merge_cells.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/js/row.js" location="includes/tiny_mce/plugins/table/js/row.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/js/table.js" location="includes/tiny_mce/plugins/table/js/table.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/langs/en_dlg.js" location="includes/tiny_mce/plugins/table/langs/en_dlg.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/merge_cells.htm" location="includes/tiny_mce/plugins/table/merge_cells.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/row.htm" location="includes/tiny_mce/plugins/table/row.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/table/table.htm" location="includes/tiny_mce/plugins/table/table.htm"><param name="batch" value="false"/></resource>
+        <resource type="download" name="plugins/table/cell.htm" location="includes/tiny_mce/plugins/table/cell.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/css/cell.css" location="includes/tiny_mce/plugins/table/css/cell.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/css/row.css" location="includes/tiny_mce/plugins/table/css/row.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/css/table.css" location="includes/tiny_mce/plugins/table/css/table.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/editor_plugin.js" location="includes/tiny_mce/plugins/table/editor_plugin.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/js/cell.js" location="includes/tiny_mce/plugins/table/js/cell.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/js/merge_cells.js" location="includes/tiny_mce/plugins/table/js/merge_cells.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/js/row.js" location="includes/tiny_mce/plugins/table/js/row.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/js/table.js" location="includes/tiny_mce/plugins/table/js/table.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/langs/en_dlg.js" location="includes/tiny_mce/plugins/table/langs/en_dlg.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/merge_cells.htm" location="includes/tiny_mce/plugins/table/merge_cells.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/row.htm" location="includes/tiny_mce/plugins/table/row.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/table/table.htm" location="includes/tiny_mce/plugins/table/table.htm">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="plugins/fullscreen/editor_plugin.js" location="includes/tiny_mce/plugins/fullscreen/editor_plugin.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/fullscreen/fullscreen.htm" location="includes/tiny_mce/plugins/fullscreen/fullscreen.htm"><param name="batch" value="false"/></resource>
+        <resource type="download" name="plugins/fullscreen/editor_plugin.js" location="includes/tiny_mce/plugins/fullscreen/editor_plugin.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/fullscreen/fullscreen.htm" location="includes/tiny_mce/plugins/fullscreen/fullscreen.htm">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="plugins/preview/editor_plugin.js" location="includes/tiny_mce/plugins/preview/editor_plugin.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/preview/example.html" location="includes/tiny_mce/plugins/preview/example.html"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/preview/jscripts/embed.js" location="includes/tiny_mce/plugins/preview/jscripts/embed.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/preview/preview.html" location="includes/tiny_mce/plugins/preview/preview.html"><param name="batch" value="false"/></resource>
+        <resource type="download" name="plugins/preview/editor_plugin.js" location="includes/tiny_mce/plugins/preview/editor_plugin.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/preview/example.html" location="includes/tiny_mce/plugins/preview/example.html">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/preview/jscripts/embed.js" location="includes/tiny_mce/plugins/preview/jscripts/embed.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/preview/preview.html" location="includes/tiny_mce/plugins/preview/preview.html">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="plugins/contextmenu/editor_plugin.js" location="includes/tiny_mce/plugins/contextmenu/editor_plugin.js"><param name="batch" value="false"/></resource>
+        <resource type="download" name="plugins/contextmenu/editor_plugin.js" location="includes/tiny_mce/plugins/contextmenu/editor_plugin.js">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="plugins/inlinepopups/editor_plugin.js" location="includes/tiny_mce/plugins/inlinepopups/editor_plugin.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/alert.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/button.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/buttons.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/confirm.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/corners.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/vertical.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/window.css" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/inlinepopups/template.htm" location="includes/tiny_mce/plugins/inlinepopups/template.htm"><param name="batch" value="false"/></resource>
+        <resource type="download" name="plugins/inlinepopups/editor_plugin.js" location="includes/tiny_mce/plugins/inlinepopups/editor_plugin.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/alert.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/button.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/buttons.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/buttons.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/confirm.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/corners.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/horizontal.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/img/vertical.gif" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/skins/clearlooks2/window.css" location="includes/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/inlinepopups/template.htm" location="includes/tiny_mce/plugins/inlinepopups/template.htm">
+            <param name="batch" value="false"/>
+        </resource>
 
-        <resource type="download" name="plugins/paste/editor_plugin.js" location="includes/tiny_mce/plugins/paste/editor_plugin.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/paste/js/pastetext.js" location="includes/tiny_mce/plugins/paste/js/pastetext.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/paste/js/pasteword.js" location="includes/tiny_mce/plugins/paste/js/pasteword.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/paste/langs/en_dlg.js" location="includes/tiny_mce/plugins/paste/langs/en_dlg.js"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/paste/pastetext.htm" location="includes/tiny_mce/plugins/paste/pastetext.htm"><param name="batch" value="false"/></resource>
-        <resource type="download" name="plugins/paste/pasteword.htm" location="includes/tiny_mce/plugins/paste/pasteword.htm"><param name="batch" value="false"/></resource>
+        <resource type="download" name="plugins/paste/editor_plugin.js" location="includes/tiny_mce/plugins/paste/editor_plugin.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/paste/js/pastetext.js" location="includes/tiny_mce/plugins/paste/js/pastetext.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/paste/js/pasteword.js" location="includes/tiny_mce/plugins/paste/js/pasteword.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/paste/langs/en_dlg.js" location="includes/tiny_mce/plugins/paste/langs/en_dlg.js">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/paste/pastetext.htm" location="includes/tiny_mce/plugins/paste/pastetext.htm">
+            <param name="batch" value="false"/>
+        </resource>
+        <resource type="download" name="plugins/paste/pasteword.htm" location="includes/tiny_mce/plugins/paste/pasteword.htm">
+            <param name="batch" value="false"/>
+        </resource>
 
     </web-resource>
 </atlassian-plugin>
