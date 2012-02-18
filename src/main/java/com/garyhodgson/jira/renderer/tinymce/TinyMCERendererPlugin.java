@@ -27,11 +27,14 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     public void init(JiraRendererModuleDescriptor jiraRendererModuleDescriptor) {
         this.jiraRendererModuleDescriptor = jiraRendererModuleDescriptor;
         this.atlassianWikiRenderer = new AtlassianWikiRenderer();
-
     }
 
     public String render(String s, IssueRenderContext issueRenderContext) {
 
+        if (s == null){
+            return s;
+        }
+        
         if (renderWikiText() && !s.startsWith("<")) {
             s = atlassianWikiRenderer.render(s, issueRenderContext);
         }
@@ -75,6 +78,7 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     }
 
     private String transformLineBreaks(String s) {
+        
         if (!s.startsWith("<")) {
             s = s.replaceAll("\n", "<br>");
         }
