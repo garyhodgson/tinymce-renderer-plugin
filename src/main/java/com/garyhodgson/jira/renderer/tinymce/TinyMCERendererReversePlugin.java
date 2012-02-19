@@ -41,6 +41,10 @@ public class TinyMCERendererReversePlugin implements JiraRendererPlugin {
     }
 
     public String render(String s, IssueRenderContext issueRenderContext) {
+        
+        if (s == null){
+            return "";
+        }
 
         StringBuilder sb = new StringBuilder();
         String[] lines = s.split("\n");
@@ -55,6 +59,11 @@ public class TinyMCERendererReversePlugin implements JiraRendererPlugin {
     }
 
     public String renderAsText(String s, IssueRenderContext issueRenderContext) {
+        
+        if (s == null){
+            return "";
+        }
+        
         return HTMLUtils.stripTags(s);
     }
 
