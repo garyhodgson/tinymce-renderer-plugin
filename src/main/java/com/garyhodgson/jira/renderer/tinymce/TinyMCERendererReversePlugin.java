@@ -1,7 +1,6 @@
 package com.garyhodgson.jira.renderer.tinymce;
 
 import com.atlassian.core.util.HTMLUtils;
-import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.config.properties.PropertiesManager;
 import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
@@ -20,8 +19,7 @@ public class TinyMCERendererReversePlugin implements JiraRendererPlugin {
     private Whitelist whitelist;
 
     public TinyMCERendererReversePlugin() {
-        PropertiesManager propertiesManager = ComponentManager.getComponent(PropertiesManager.class);
-        this.properties = propertiesManager.getPropertySet();
+        this.properties = PropertiesManager.getInstance().getPropertySet();
         this.whitelist = Whitelist.none();
         this.whitelist.addTags("table", "thead", "tbody", "td", "tr", "img");
         this.whitelist.addAttributes("img", "src", "height", "width");
