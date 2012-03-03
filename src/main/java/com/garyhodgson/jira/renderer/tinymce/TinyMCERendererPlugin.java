@@ -1,5 +1,6 @@
 package com.garyhodgson.jira.renderer.tinymce;
 
+import com.atlassian.core.util.HTMLUtils;
 import com.atlassian.jira.config.properties.PropertiesManager;
 import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
@@ -8,6 +9,7 @@ import com.atlassian.jira.plugin.renderer.JiraRendererModuleDescriptor;
 import com.atlassian.jira.util.JiraKeyUtils;
 import com.opensymphony.module.propertyset.PropertyException;
 import com.opensymphony.module.propertyset.PropertySet;
+import com.opensymphony.util.TextUtils;
 
 public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
@@ -43,7 +45,7 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
         StringBuilder text = new StringBuilder();
         text.append(LINE_SEPARATOR).append(LINE_SEPARATOR);
-        text.append(JiraKeyUtils.linkBugKeys(s));
+        text.append(JiraKeyUtils.linkBugKeys(TextUtils.hyperlink(s)));
 
         return text.toString();
     }
@@ -54,7 +56,7 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     }
 
     public String renderAsText(String s, IssueRenderContext issueRenderContext) {
-        return s;
+        return JiraKeyUtils.linkBugKeys(TextUtils.hyperlink(HTMLUtils.stripTags(s)));
     }
 
     public Object transformForEdit(Object obj) {
