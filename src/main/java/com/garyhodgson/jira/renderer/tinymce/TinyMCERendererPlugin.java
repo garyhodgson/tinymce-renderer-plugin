@@ -9,8 +9,10 @@ import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer;
 import com.atlassian.jira.plugin.renderer.JiraRendererModuleDescriptor;
 import com.atlassian.jira.util.JiraKeyUtils;
+import com.atlassian.jira.util.velocity.VelocityRequestContextFactory;
 import com.opensymphony.module.propertyset.PropertyException;
 import com.opensymphony.module.propertyset.PropertySet;
+import com.opensymphony.util.TextUtils;
 
 public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
@@ -20,10 +22,10 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     private AtlassianWikiRenderer atlassianWikiRenderer;
     private PropertySet properties;
 
-    public TinyMCERendererPlugin(EventPublisher eventPublisher) {
-        this.atlassianWikiRenderer = new AtlassianWikiRenderer(eventPublisher);
-         PropertiesManager propertiesManager = ComponentManager.getComponent(PropertiesManager.class);
-         this.properties = propertiesManager.getPropertySet();
+    public TinyMCERendererPlugin(EventPublisher eventPublisher, VelocityRequestContextFactory velocityRequestContextFactory) {
+        this.atlassianWikiRenderer = new AtlassianWikiRenderer(eventPublisher, velocityRequestContextFactory);
+        PropertiesManager propertiesManager = ComponentManager.getComponent(PropertiesManager.class);
+        this.properties = propertiesManager.getPropertySet();
     }
 
     public void init(JiraRendererModuleDescriptor jiraRendererModuleDescriptor) {
@@ -40,10 +42,10 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
     public String render(String s, IssueRenderContext issueRenderContext) {
 
-        if (s == null){
+        if (s == null) {
             return "";
         }
-        
+
         if (renderWikiText() && !s.startsWith("<")) {
             s = atlassianWikiRenderer.render(s, issueRenderContext);
         }
@@ -51,13 +53,13 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
 
         StringBuilder text = new StringBuilder();
         text.append(LINE_SEPARATOR).append(LINE_SEPARATOR);
-        text.append(JiraKeyUtils.linkBugKeys(s));
+        text.append(JiraKeyUtils.linkBugKeys(TextUtils.hyperlink(s)));
 
         return text.toString();
     }
 
     public String renderAsText(String s, IssueRenderContext issueRenderContext) {
-        return HTMLUtils.stripTags(s);
+        return JiraKeyUtils.linkBugKeys(TextUtils.hyperlink(HTMLUtils.stripTags(s)));
     }
 
     public Object transformForEdit(Object obj) {

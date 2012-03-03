@@ -6,8 +6,10 @@ import com.atlassian.jira.config.properties.PropertiesManager;
 import com.atlassian.jira.issue.fields.renderer.IssueRenderContext;
 import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.plugin.renderer.JiraRendererModuleDescriptor;
+import com.atlassian.jira.util.JiraKeyUtils;
 import com.opensymphony.module.propertyset.PropertyException;
 import com.opensymphony.module.propertyset.PropertySet;
+import com.opensymphony.util.TextUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -54,8 +56,9 @@ public class TinyMCERendererReversePlugin implements JiraRendererPlugin {
             }
             sb.append(line);
         }
+        
 
-        return sb.toString();
+        return JiraKeyUtils.linkBugKeys(TextUtils.hyperlink(sb.toString()));
     }
 
     public String renderAsText(String s, IssueRenderContext issueRenderContext) {
@@ -64,7 +67,7 @@ public class TinyMCERendererReversePlugin implements JiraRendererPlugin {
             return "";
         }
         
-        return HTMLUtils.stripTags(s);
+        return JiraKeyUtils.linkBugKeys(TextUtils.hyperlink(HTMLUtils.stripTags(s)));
     }
 
     public Object transformForEdit(Object obj) {
