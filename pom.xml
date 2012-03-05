@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.garyhodgson.jira</groupId>
     <artifactId>tinymce-renderer-plugin</artifactId>
-    <version>1.5.8</version>
+    <version>1.6.0</version>
 
     <name>tinymce-renderer-plugin</name>
     <description>Provides a wysiwyg textarea renderer using the TinyMCE Editor.</description>
@@ -22,7 +22,13 @@
     <dependencies>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>atlassian-jira</artifactId>
+            <artifactId>jira-core</artifactId>
+            <version>${jira.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-api</artifactId>
             <version>${jira.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -39,7 +45,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- jsoup HTML parser library @ http://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.6.1</version>
@@ -51,12 +56,40 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>maven-jira-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.8</version>
                 <extensions>true</extensions>
+                
                 <configuration>
+                    <systemProperties> 
+                    <!--
+                        <property> 
+                            <name>atlassian.dev.mode</name> 
+                            <value>false</value> 
+                        </property> 
+                        <property> 
+                            <name>atlassian.mail.senddisabled</name> 
+                            <value>true</value> 
+                        </property> 
+                        <property> 
+                            <name>atlassian.mail.fetchdisabled</name> 
+                            <value>true</value> 
+                        </property> 
+                        <property> 
+                            <name>jira.trackback.senddisabled</name> 
+                            <value>true</value> 
+                        </property> 
+                        <property> 
+                            <name>atlassian.disable.caches</name> 
+                            <value>true</value> 
+                        </property>
+                        <property> 
+                            <name>atlassian.webresource.disable.minification</name> 
+                            <value>true</value> 
+                        </property>
+                        -->
+                    </systemProperties> 
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>
-                    <!--<productDataPath>${basedir}/src/test/resources/generated-test-resources.zip</productDataPath>-->
                     <productDataPath>${basedir}/src/test/resources/generated-test-resources-4.4.zip</productDataPath>
                 </configuration>
             </plugin>

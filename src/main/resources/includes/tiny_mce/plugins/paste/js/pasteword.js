@@ -10,7 +10,7 @@ var PasteWordDialog = {
 		doc = ifr.contentWindow.document;
 
 		// Force absolute CSS urls
-		css = [ed.baseURI.toAbsolute("themes/" + ed.settings.theme + "/skins/" + ed.settings.skin + "/content.css")];
+		css = [ed.baseURI.toAbsolute("../download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + ed.settings.theme + "/skins/" + ed.settings.skin + "/content.css")];
 		css = css.concat(tinymce.explode(ed.settings.content_css) || []);
 		tinymce.each(css, function(u) {
 			cssHTML += '<link href="' + ed.documentBaseURI.toAbsolute('' + u) + '" rel="stylesheet" type="text/css" />';

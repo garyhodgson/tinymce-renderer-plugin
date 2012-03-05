@@ -77,7 +77,7 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
         return s;
     }
 
-    public Object transformFromEdit(Object obj) {
+    public Object transformFromEdit(Object obj) {         
         return obj;
     }
 

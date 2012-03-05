@@ -1,3 +1,1 @@
-$webResourceManager.requireResource("com.garyhodgson.jira.tinymce-renderer-plugin:tinymce")
-
 <textarea class="myTinyMCETextArea" name="$fieldId" >$textutils.htmlEncode($!value)</textarea>

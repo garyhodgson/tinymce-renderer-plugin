@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
 
-    var tinyMCEConfigAdvanced = {
+    tinyMCEConfigAdvanced = {
         theme : "advanced",            
         relative_urls : false,
         remove_script_host : false,
@@ -30,9 +30,9 @@ jQuery(document).ready(function() {
         relative_urls : false,
         remove_script_host : false,
         body_class : "mceEditor",
-        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image,|,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "fullscreen,|,forecolor,backcolor,|,tablecontrols,|,hr,removeformat,visualaid,sub,sup,charmap,|,preview,cleanup,code",
-        theme_advanced_buttons3 : "",
+        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,image",
+        theme_advanced_buttons2 : "fullscreen,|,tablecontrols,|,hr,removeformat,visualaid,sub,sup,charmap",
+        theme_advanced_buttons3 : "formatselect,fontselect,fontsizeselect,|,forecolor,backcolor,|,preview,cleanup,code",
         theme_advanced_buttons4 : "",
         theme_advanced_toolbar_location : "top",
         theme_advanced_toolbar_align : "left",
@@ -49,6 +49,10 @@ jQuery(document).ready(function() {
     // Bind the init function so it runs when the dialog loads
     jQuery(document).bind('dialogContentReady', function (e, dialog) {
         jQuery(dialog.$popupContent).find('.myTinyMCETextArea').tinymce(tinyMCEConfigSimple);
+        // reinit editors because jira somehow overrides the spacebar and arrow key events
+        setTimeout(function () {
+            jQuery.each(tinymce.editors, function(i,ed){ed.init()})
+        }, 250);
     });
     
     
@@ -62,8 +66,10 @@ jQuery(document).ready(function() {
     
     if (jQuery("#comment-issue").length != 0) {
         jQuery("#comment-issue").click( function(){
-            removeTinyMCEEditor()
-            jQuery('textarea.myTinyMCETextArea').tinymce(tinyMCEConfigAdvanced);
+            setTimeout(function () {
+                removeTinyMCEEditor()
+                jQuery('textarea.myTinyMCETextArea').tinymce(tinyMCEConfigAdvanced);
+            }, 1);
         });
     } else {
         jQuery('textarea.myTinyMCETextArea').tinymce(tinyMCEConfigAdvanced);
@@ -71,12 +77,25 @@ jQuery(document).ready(function() {
 
     if (jQuery("#footer-comment-button").length != 0) {
         jQuery("#footer-comment-button").click(function(){
-            removeTinyMCEEditor()
-            jQuery('textarea.myTinyMCETextArea').tinymce(tinyMCEConfigAdvanced);
+            setTimeout(function () {
+                removeTinyMCEEditor()
+                jQuery('textarea.myTinyMCETextArea').tinymce(tinyMCEConfigAdvanced);
+            }, 1);
         });
     }
 
     jQuery("#issue-comment-add-cancel").click(function(){
         removeTinyMCEEditor()
     });
+    
+    // Fix for JQuery Sizzle selector engine not checking whether an element has the getAttribute method
+    jQuery.find.selectors.filters.text = function ( elem ) {
+	if(elem.getAttribute != undefined){
+		var attr = elem.getAttribute( "type" ), type = elem.type;
+		// IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc) 
+		// use getAttribute instead to test this case
+		return "text" === type && ( attr === type || attr === null );	
+	}
+    }
+
 });
