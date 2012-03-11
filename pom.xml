@@ -39,7 +39,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- jsoup HTML parser library @ http://jsoup.org/ -->
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>1.6.1</version>
@@ -51,12 +50,11 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>maven-jira-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.8</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>
-                    <!--<productDataPath>${basedir}/src/test/resources/generated-test-resources.zip</productDataPath>-->
                     <productDataPath>${basedir}/src/test/resources/generated-test-resources-4.4.zip</productDataPath>
                 </configuration>
             </plugin>
@@ -71,8 +69,8 @@
     </build>
 
     <properties>
-        <jira.version>5.0</jira.version>
-        <jira.data.version>5.0</jira.data.version>
+        <jira.version>4.4</jira.version>
+        <jira.data.version>4.4</jira.data.version>
     </properties>
 
 </project>

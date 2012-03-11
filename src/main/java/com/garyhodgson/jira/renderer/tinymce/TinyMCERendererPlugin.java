@@ -9,7 +9,6 @@ import com.atlassian.jira.issue.fields.renderer.JiraRendererPlugin;
 import com.atlassian.jira.issue.fields.renderer.wiki.AtlassianWikiRenderer;
 import com.atlassian.jira.plugin.renderer.JiraRendererModuleDescriptor;
 import com.atlassian.jira.util.JiraKeyUtils;
-import com.atlassian.jira.util.velocity.VelocityRequestContextFactory;
 import com.opensymphony.module.propertyset.PropertyException;
 import com.opensymphony.module.propertyset.PropertySet;
 import com.opensymphony.util.TextUtils;
@@ -22,8 +21,8 @@ public class TinyMCERendererPlugin implements JiraRendererPlugin {
     private AtlassianWikiRenderer atlassianWikiRenderer;
     private PropertySet properties;
 
-    public TinyMCERendererPlugin(EventPublisher eventPublisher, VelocityRequestContextFactory velocityRequestContextFactory) {
-        this.atlassianWikiRenderer = new AtlassianWikiRenderer(eventPublisher, velocityRequestContextFactory);
+    public TinyMCERendererPlugin(EventPublisher eventPublisher) {
+        this.atlassianWikiRenderer = new AtlassianWikiRenderer(eventPublisher);
         PropertiesManager propertiesManager = ComponentManager.getComponent(PropertiesManager.class);
         this.properties = propertiesManager.getPropertySet();
     }
