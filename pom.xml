@@ -61,7 +61,7 @@
                 
                 <configuration>
                     <systemProperties> 
-                    <!--
+
                         <property> 
                             <name>atlassian.dev.mode</name> 
                             <value>false</value> 
@@ -86,7 +86,7 @@
                             <name>atlassian.webresource.disable.minification</name> 
                             <value>true</value> 
                         </property>
-                        -->
+
                     </systemProperties> 
                     <productVersion>${jira.version}</productVersion>
                     <productDataVersion>${jira.data.version}</productDataVersion>

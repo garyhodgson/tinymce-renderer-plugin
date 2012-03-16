@@ -50,9 +50,9 @@ jQuery(document).ready(function() {
     jQuery(document).bind('dialogContentReady', function (e, dialog) {
         jQuery(dialog.$popupContent).find('.myTinyMCETextArea').tinymce(tinyMCEConfigSimple);
         // reinit editors because jira somehow overrides the spacebar and arrow key events
-        setTimeout(function () {
-            jQuery.each(tinymce.editors, function(i,ed){ed.init()})
-        }, 250);
+//        setTimeout(function () {
+//            jQuery.each(tinymce.editors, function(i,ed){ed.init()})
+//        }, 600);
     });
     
     
@@ -90,12 +90,12 @@ jQuery(document).ready(function() {
     
     // Fix for JQuery Sizzle selector engine not checking whether an element has the getAttribute method
     jQuery.find.selectors.filters.text = function ( elem ) {
-	if(elem.getAttribute != undefined){
-		var attr = elem.getAttribute( "type" ), type = elem.type;
-		// IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc) 
-		// use getAttribute instead to test this case
-		return "text" === type && ( attr === type || attr === null );	
-	}
+        var attr = null
+        if(elem.getAttribute != undefined){
+            var attr = elem.getAttribute( "type" ), type = elem.type;
+            // IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc)
+            // use getAttribute instead to test this case
+            return "text" === type && ( attr === type || attr === null );
+        }
     }
-
 });

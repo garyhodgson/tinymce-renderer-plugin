@@ -10727,7 +10727,10 @@ tinymce.create('tinymce.ui.Toolbar:tinymce.ui.Container', {
 				t.theme = new o();
 
 				if (t.theme.init && s.init_theme){
-                                    t.theme.init(t, "../download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + s.theme);
+                                    
+                                    var themeURL = "../download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + s.theme
+                                    
+                                    t.theme.init(t, themeURL);
                                 }
                                     
 			}
