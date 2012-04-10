@@ -10727,13 +10727,13 @@ tinymce.create('tinymce.ui.Toolbar:tinymce.ui.Container', {
 				t.theme = new o();
 
 				if (t.theme.init && s.init_theme){
-                                    t.theme.init(t, "../download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + s.theme);
+                                    t.theme.init(t, AJS.contextPath() + "/download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + s.theme);
                                 }
                                     
 			}
 			function initPlugin(p) {
 				var c = PluginManager.get(p)
-                                var u = "../download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/plugins/" + p
+                                var u = AJS.contextPath() +"/download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/plugins/" + p
                                 var po;
 				if (c && tinymce.inArray(initializedPlugins,p) === -1) {
 					each(PluginManager.dependencies(p), function(dep){
@@ -10759,7 +10759,7 @@ tinymce.create('tinymce.ui.Toolbar:tinymce.ui.Container', {
                                    	s.popup_css = t.documentBaseURI.toAbsolute(s.popup_css);
                                 }				
 				else{
-                                       s.popup_css = t.baseURI.toAbsolute("../download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + s.theme + "/skins/" + s.skin + "/dialog.css");
+                                       s.popup_css = t.baseURI.toAbsolute(AJS.contextPath() + "/download/resources/com.garyhodgson.jira.tinymce-renderer-plugin:tinymce-renderer/themes/" + s.theme + "/skins/" + s.skin + "/dialog.css");
                                 }
                                  
 			}
