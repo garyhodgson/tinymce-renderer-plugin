@@ -46,13 +46,14 @@ jQuery(document).ready(function() {
         invalid_elements : "script,input,applet,embed,xml,style,object"
     }
     
-    // Bind the init function so it runs when the dialog loads
-    jQuery(document).bind('dialogContentReady', function (e, dialog) {
-        jQuery(dialog.$popupContent).find('.myTinyMCETextArea').tinymce(tinyMCEConfigSimple);
-        // reinit editors because jira somehow overrides the spacebar and arrow key events
-//        setTimeout(function () {
-//            jQuery.each(tinymce.editors, function(i,ed){ed.init()})
-//        }, 600);
+    // Bind the init function so it runs when a dialog loads, or any other dynamic content situation
+    JIRA.bind(JIRA.Events.NEW_CONTENT_ADDED, function (e, $context) {
+        $context.find('.myTinyMCETextArea').each(function (i, el) {
+            var $ed = jQuery(el);
+            if (!$ed.tinymce()) { // only create it once
+                $ed.tinymce(tinyMCEConfigSimple)
+            }
+        });
     });
     
     
