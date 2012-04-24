@@ -104,8 +104,8 @@
     </build>
 
     <properties>
-        <jira.version>5.0</jira.version>
-        <jira.data.version>5.0</jira.data.version>
+        <jira.version>5.0.3</jira.version>
+        <jira.data.version>5.0.3</jira.data.version>
     </properties>
 
 </project>
