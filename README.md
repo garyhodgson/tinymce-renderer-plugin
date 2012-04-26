@@ -1,6 +1,9 @@
 # tinymce-renderer-plugin
 
-###IMPORTANT! A bug has recently been found in the plugin when used with Jira 5.0 which makes this plugin unusable.  This, together with the fact I am finding it increasingly hard to find time to provide the minimum support necessary means that this plugin is no longer supported.  Please do not use this for any version of Jira as any upgrade or system change may result in the plugin not working.
+###IMPORTANT! 
+~~A bug has recently been found in the plugin when used with Jira 5.0 which makes this plugin unusable.~~  UPDATE: The Jira 5 bug has been resolved by Atlassian in version 5.0.3 which is now available. Version 1.6.1 of the plugin is released in order to support existing users of the plugin, however no further support will be provided.
+
+Please note: I am finding it increasingly hard to find time to provide the minimum support necessary, therefore this plugin is no longer supported. Please do not use this for any version of Jira as any upgrade or system change may result in the plugin not working.
 
 For existing users of the plugin who wish to update their Jira instance: I recommend first testing the plugin in the new version (excluding version 5), and if this fails to work either disable the plugin and allow your users to edit the html in the existing fields by hand, or use the Reverse Renderer to remove the html tags.
 
@@ -9,7 +12,6 @@ For existing users of the plugin who wish to update their Jira instance: I recom
 A Jira plugin that provides a wysiwyg textarea renderer using the [TinyMCE Editor](http://tinymce.moxiecode.com).
 
 * [Homepage](http://garyhodgson.github.com/tinymce-renderer-plugin)
-* [Atlassian Plugin Page](https://plugins.atlassian.com/plugin/details/30365)
 
 ## Installation and Configuration
 
